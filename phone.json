@@ -1,0 +1,964 @@
+{
+  "countryCodes": [
+    {
+      "code": "AC"
+    },
+    {
+      "code": "AD"
+    },
+    {
+      "code": "AE"
+    },
+    {
+      "code": "AF"
+    },
+    {
+      "code": "AG"
+    },
+    {
+      "code": "AI"
+    },
+    {
+      "code": "AL"
+    },
+    {
+      "code": "AM"
+    },
+    {
+      "code": "AN"
+    },
+    {
+      "code": "AO"
+    },
+    {
+      "code": "AQ"
+    },
+    {
+      "code": "AR",
+      "validateFormat": "0{0,2}(54)?9?(11|22|23|24|26|28|29|33|34|35|36|37|38)([0-9]{4,5})([0-9]{4})",
+      "defaultFormat": "54$2$3$4",
+      "viewFormat": "+CCC.ACN1N2",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "numberPart2Pattern": "$4",
+      "timeZone": "America/Argentina/Buenos_Aires"
+    },
+    {
+      "code": "AS"
+    },
+    {
+      "code": "AT"
+    },
+    {
+      "code": "AU",
+      "validateFormat": "0{0,2}(61)?(4)([0-9]{8})",
+      "defaultFormat": "61$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "Australia/Sydney"
+    },
+    {
+      "code": "AW"
+    },
+    {
+      "code": "AX"
+    },
+    {
+      "code": "AZ"
+    },
+    {
+      "code": "BA"
+    },
+    {
+      "code": "BB"
+    },
+    {
+      "code": "BD"
+    },
+    {
+      "code": "BE"
+    },
+    {
+      "code": "BF"
+    },
+    {
+      "code": "BG"
+    },
+    {
+      "code": "BH"
+    },
+    {
+      "code": "BI"
+    },
+    {
+      "code": "BJ"
+    },
+    {
+      "code": "BL"
+    },
+    {
+      "code": "BM"
+    },
+    {
+      "code": "BN"
+    },
+    {
+      "code": "BO",
+      "validateFormat": "0{0,2}(591)?(6|7)([0-9]{7})",
+      "defaultFormat": "591$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/La_Paz"
+    },
+    {
+      "code": "BQ"
+    },
+    {
+      "code": "BR",
+      "validateFormat": "0{0,2}(55)?(11|12|13|14|15|16|17|18|19|21|22|24|27|28|31|32|33|34|35|37|38|41|42|43|44|45|46|47|48|49|51|53|54|55|61|62|64|63|65|66|67|68|69|71|73|74|75|77|79|81|87|82|83|84|85|88|86|89|91|93|94|92|97|95|96|98|99)(9?[0-9]{4})([0-9]{4})",
+      "defaultFormat": "55$2$3$4",
+      "viewFormat": "+CCC (AC) N1-N2",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "numberPart2Pattern": "$4",
+      "timeZone": "America/Sao_Paulo"
+    },
+    {
+      "code": "BS"
+    },
+    {
+      "code": "BT"
+    },
+    {
+      "code": "BV"
+    },
+    {
+      "code": "BW"
+    },
+    {
+      "code": "BY"
+    },
+    {
+      "code": "BZ",
+      "validateFormat": "0{0,2}(501)?(622|623|624|625)([0-9]{4})",
+      "defaultFormat": "501$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Belize"
+    },
+    {
+      "code": "CA"
+    },
+    {
+      "code": "CC"
+    },
+    {
+      "code": "CD"
+    },
+    {
+      "code": "CF"
+    },
+    {
+      "code": "CG"
+    },
+    {
+      "code": "CH"
+    },
+    {
+      "code": "CI"
+    },
+    {
+      "code": "CK"
+    },
+    {
+      "code": "CL",
+      "validateFormat": "0{0,2}(56)?([0-9]{2})([0-9]{3})([0-9]{4})",
+      "defaultFormat": "56$2$3$4",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "numberPart2Pattern": "$4",
+      "timeZone": "America/Santiago"
+    },
+    {
+      "code": "CM"
+    },
+    {
+      "code": "CN"
+    },
+    {
+      "code": "CO",
+      "validateFormat": "0{0,2}(57)?(3[0-9]{2})([0-9]{7})",
+      "defaultFormat": "57$2$3",
+      "viewFormat": "+CCC.ACN1",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Bogota"
+    },
+    {
+      "code": "CR",
+      "validateFormat": "0{0,2}(506)?([5-8])([0-9]{7})",
+      "defaultFormat": "506$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Costa_Rica"
+    },
+    {
+      "code": "CS"
+    },
+    {
+      "code": "CU"
+    },
+    {
+      "code": "CV"
+    },
+    {
+      "code": "CW"
+    },
+    {
+      "code": "CX"
+    },
+    {
+      "code": "CY"
+    },
+    {
+      "code": "CZ"
+    },
+    {
+      "code": "DD"
+    },
+    {
+      "code": "DE"
+    },
+    {
+      "code": "DJ"
+    },
+    {
+      "code": "DK"
+    },
+    {
+      "code": "DM"
+    },
+    {
+      "code": "DO",
+      "validateFormat": "0{0,2}(1)?(809|829|849)([0-9]{3})([0-9]{4})",
+      "defaultFormat": "1$2$3$4",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "numberPart2Pattern": "$4",
+      "timeZone": "America/Santo_Domingo"
+    },
+    {
+      "code": "DZ"
+    },
+    {
+      "code": "EC",
+      "validateFormat": "0{0,2}(593)?(9[0-9])([0-9]{7})",
+      "defaultFormat": "593$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Guayaquil"
+    },
+    {
+      "code": "EE"
+    },
+    {
+      "code": "EG"
+    },
+    {
+      "code": "EH"
+    },
+    {
+      "code": "ER"
+    },
+    {
+      "code": "ES",
+      "validateFormat": "0{0,2}(34)?(9|7|6)([0-9]{8})",
+      "defaultFormat": "34$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "Europe/Madrid"
+    },
+    {
+      "code": "ET"
+    },
+    {
+      "code": "EU"
+    },
+    {
+      "code": "FI"
+    },
+    {
+      "code": "FJ"
+    },
+    {
+      "code": "FK"
+    },
+    {
+      "code": "FM"
+    },
+    {
+      "code": "FO"
+    },
+    {
+      "code": "FR"
+    },
+    {
+      "code": "GA"
+    },
+    {
+      "code": "GB"
+    },
+    {
+      "code": "GD"
+    },
+    {
+      "code": "GE"
+    },
+    {
+      "code": "GF"
+    },
+    {
+      "code": "GG"
+    },
+    {
+      "code": "GH"
+    },
+    {
+      "code": "GI"
+    },
+    {
+      "code": "GL"
+    },
+    {
+      "code": "GM"
+    },
+    {
+      "code": "GN"
+    },
+    {
+      "code": "GP"
+    },
+    {
+      "code": "GQ"
+    },
+    {
+      "code": "GR"
+    },
+    {
+      "code": "GS"
+    },
+    {
+      "code": "GT",
+      "validateFormat": "0{0,2}(502)?(3|4|5)([0-9]{7})",
+      "defaultFormat": "502$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Guatemala"
+    },
+    {
+      "code": "GU"
+    },
+    {
+      "code": "GW"
+    },
+    {
+      "code": "GY"
+    },
+    {
+      "code": "HK"
+    },
+    {
+      "code": "HM"
+    },
+    {
+      "code": "HN",
+      "validateFormat": "0{0,2}(504)?(3|7|8|9)([0-9]{7})",
+      "defaultFormat": "504$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Tegucigalpa"
+    },
+    {
+      "code": "HR"
+    },
+    {
+      "code": "HT"
+    },
+    {
+      "code": "HU"
+    },
+    {
+      "code": "IC"
+    },
+    {
+      "code": "ID"
+    },
+    {
+      "code": "IE"
+    },
+    {
+      "code": "IL"
+    },
+    {
+      "code": "IM"
+    },
+    {
+      "code": "IN"
+    },
+    {
+      "code": "IO"
+    },
+    {
+      "code": "IQ"
+    },
+    {
+      "code": "IR"
+    },
+    {
+      "code": "IS"
+    },
+    {
+      "code": "IT"
+    },
+    {
+      "code": "JE"
+    },
+    {
+      "code": "JM",
+      "validateFormat": "0{0,2}(1876)?([0-9]{7})",
+      "defaultFormat": "1876$2",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "timeZone": "America/Jamaica"
+    },
+    {
+      "code": "JO"
+    },
+    {
+      "code": "JP"
+    },
+    {
+      "code": "KE"
+    },
+    {
+      "code": "KG"
+    },
+    {
+      "code": "KH"
+    },
+    {
+      "code": "KI"
+    },
+    {
+      "code": "KM"
+    },
+    {
+      "code": "KN"
+    },
+    {
+      "code": "KP"
+    },
+    {
+      "code": "KR"
+    },
+    {
+      "code": "KW"
+    },
+    {
+      "code": "KY"
+    },
+    {
+      "code": "KZ"
+    },
+    {
+      "code": "LA"
+    },
+    {
+      "code": "LB"
+    },
+    {
+      "code": "LC"
+    },
+    {
+      "code": "LI"
+    },
+    {
+      "code": "LK"
+    },
+    {
+      "code": "LR"
+    },
+    {
+      "code": "LS"
+    },
+    {
+      "code": "LT"
+    },
+    {
+      "code": "LU"
+    },
+    {
+      "code": "LV"
+    },
+    {
+      "code": "LY"
+    },
+    {
+      "code": "MA"
+    },
+    {
+      "code": "MC"
+    },
+    {
+      "code": "MD"
+    },
+    {
+      "code": "ME"
+    },
+    {
+      "code": "MF"
+    },
+    {
+      "code": "MG"
+    },
+    {
+      "code": "MH"
+    },
+    {
+      "code": "MK"
+    },
+    {
+      "code": "ML"
+    },
+    {
+      "code": "MM"
+    },
+    {
+      "code": "MN"
+    },
+    {
+      "code": "MO"
+    },
+    {
+      "code": "MP"
+    },
+    {
+      "code": "MQ"
+    },
+    {
+      "code": "MR"
+    },
+    {
+      "code": "MS"
+    },
+    {
+      "code": "MT"
+    },
+    {
+      "code": "MU"
+    },
+    {
+      "code": "MV"
+    },
+    {
+      "code": "MW"
+    },
+    {
+      "code": "MX",
+      "validateFormat": "0{0,2}(52)?(1)?(?:(55|33|81)([0-9]{4})|([0-9]{3})([0-9]{3}))([0-9]{4})|([a-zA-Z0-9]{12})",
+      "defaultFormat": "52$3$5$4$6$7",
+      "viewFormat": "+CCC.ACN1N2",
+      "cccPattern": "$1",
+      "areaCodePattern": "$3$5",
+      "numberPart1Pattern": "$4$6",
+      "numberPart2Pattern": "$7",
+      "timeZone": "America/Mexico_City"
+    },
+    {
+      "code": "MY"
+    },
+    {
+      "code": "MZ"
+    },
+    {
+      "code": "NA"
+    },
+    {
+      "code": "NC"
+    },
+    {
+      "code": "NE"
+    },
+    {
+      "code": "NF"
+    },
+    {
+      "code": "NG"
+    },
+    {
+      "code": "NI",
+      "validateFormat": "0{0,2}(505)?([0-9]{1})([0-9]{7})",
+      "defaultFormat": "505$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Managua"
+    },
+    {
+      "code": "NL"
+    },
+    {
+      "code": "NO"
+    },
+    {
+      "code": "NP"
+    },
+    {
+      "code": "NR"
+    },
+    {
+      "code": "NU"
+    },
+    {
+      "code": "NZ"
+    },
+    {
+      "code": "OM"
+    },
+    {
+      "code": "PA",
+      "validateFormat": "0{0,2}(507)?(6)([0-9]{7})",
+      "defaultFormat": "507$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Panama"
+    },
+    {
+      "code": "PE",
+      "validateFormat": "0{0,2}(51)?(9[0-9])([0-9]{7})",
+      "defaultFormat": "51$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Lima"
+    },
+    {
+      "code": "PF"
+    },
+    {
+      "code": "PG"
+    },
+    {
+      "code": "PH"
+    },
+    {
+      "code": "PK"
+    },
+    {
+      "code": "PL"
+    },
+    {
+      "code": "PM"
+    },
+    {
+      "code": "PN"
+    },
+    {
+      "code": "PR",
+      "validateFormat": "0{0,2}(1)?(787|939)([0-9]{3})([0-9]{4})",
+      "defaultFormat": "1$2$3$4",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "numberPart2Pattern": "$4",
+      "timeZone": "America/Puerto_Rico"
+    },
+    {
+      "code": "PS"
+    },
+    {
+      "code": "PT"
+    },
+    {
+      "code": "PW"
+    },
+    {
+      "code": "PY",
+      "validateFormat": "0{0,2}(595)?(9[6-9][1-6])([0-9]{6})",
+      "defaultFormat": "595$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Asuncion"
+    },
+    {
+      "code": "QA"
+    },
+    {
+      "code": "RE"
+    },
+    {
+      "code": "RO"
+    },
+    {
+      "code": "RS"
+    },
+    {
+      "code": "RU"
+    },
+    {
+      "code": "RW"
+    },
+    {
+      "code": "SA"
+    },
+    {
+      "code": "SB"
+    },
+    {
+      "code": "SC"
+    },
+    {
+      "code": "SD"
+    },
+    {
+      "code": "SE"
+    },
+    {
+      "code": "SG"
+    },
+    {
+      "code": "SH"
+    },
+    {
+      "code": "SI"
+    },
+    {
+      "code": "SJ"
+    },
+    {
+      "code": "SK"
+    },
+    {
+      "code": "SL"
+    },
+    {
+      "code": "SM"
+    },
+    {
+      "code": "SN"
+    },
+    {
+      "code": "SO"
+    },
+    {
+      "code": "SR"
+    },
+    {
+      "code": "SS"
+    },
+    {
+      "code": "ST"
+    },
+    {
+      "code": "SU"
+    },
+    {
+      "code": "SV",
+      "validateFormat": "0{0,2}(503)?((?:7|6|2)[0-9])([0-9]{6})",
+      "defaultFormat": "503$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/El_Salvador"
+    },
+    {
+      "code": "SX"
+    },
+    {
+      "code": "SY"
+    },
+    {
+      "code": "SZ"
+    },
+    {
+      "code": "TA"
+    },
+    {
+      "code": "TC"
+    },
+    {
+      "code": "TD"
+    },
+    {
+      "code": "TF"
+    },
+    {
+      "code": "TG"
+    },
+    {
+      "code": "TH"
+    },
+    {
+      "code": "TJ"
+    },
+    {
+      "code": "TK"
+    },
+    {
+      "code": "TL"
+    },
+    {
+      "code": "TM"
+    },
+    {
+      "code": "TN"
+    },
+    {
+      "code": "TO"
+    },
+    {
+      "code": "TP"
+    },
+    {
+      "code": "TR"
+    },
+    {
+      "code": "TT"
+    },
+    {
+      "code": "TV"
+    },
+    {
+      "code": "TW"
+    },
+    {
+      "code": "TZ"
+    },
+    {
+      "code": "UA"
+    },
+    {
+      "code": "UG"
+    },
+    {
+      "code": "UK",
+      "validateFormat": "0{0,2}(44)?((?:71|74|75|76|77|78|79)(?:\\d\\d))([0-9]{6})",
+      "defaultFormat": "44$2$3",
+      "viewFormat": "+CCC AC N1",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "Europe/London"
+    },
+    {
+      "code": "UM"
+    },
+    {
+      "code": "US",
+      "validateFormat": "0{0,2}(1)?(205|251|256|334|659|938|907|480|520|602|623|928|327|479|501|870|209|213|310|323|341|369|408|415|424|442|510|530|559|562|619|626|627|628|650|657|661|669|707|714|747|760|764|805|818|831|858|909|916|925|935|949|951|303|719|720|970|203|475|860|959|302|202|239|305|321|352|386|407|561|689|727|754|772|786|813|850|863|904|927|941|954|229|404|470|478|678|706|762|770|912|808|208|217|224|309|312|331|447|464|618|630|708|730|773|779|815|847|872|219|260|317|574|765|812|930|319|515|563|641|712|316|620|785|913|270|364|502|606|859|225|318|337|504|985|207|227|240|301|410|443|667|339|351|413|508|617|774|781|857|978|231|248|269|278|313|517|586|616|679|734|810|906|947|989|218|320|507|612|651|763|952|228|601|662|769|314|417|557|573|636|660|816|975|406|308|402|531|702|725|775|603|201|551|609|732|848|856|862|908|973|505|575|212|315|347|516|518|585|607|631|646|716|718|845|914|917|929|252|336|704|828|910|919|980|984|701|216|220|234|283|330|380|419|440|513|567|614|740|937|405|539|580|918|458|503|541|971|215|267|272|412|484|570|582|610|717|724|814|878|401|803|843|854|864|605|423|615|629|731|865|901|931|210|214|254|281|325|346|361|409|430|432|469|512|682|713|737|806|817|830|832|903|915|936|940|956|972|979|385|435|801|802|276|434|540|571|703|757|804|206|253|360|425|509|564|304|681|262|274|414|534|608|715|920|307)([0-9]{3})([0-9]{4})",
+      "defaultFormat": "1$2$3$4",
+      "viewFormat": "+CCC AC-N1-N2",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "numberPart2Pattern": "$4",
+      "timeZone": "US/Eastern"
+    },
+    {
+      "code": "UY",
+      "validateFormat": "0{0,2}(598)?(9[13456789])([0-9]{6})",
+      "defaultFormat": "598$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Montevideo"
+    },
+    {
+      "code": "UZ"
+    },
+    {
+      "code": "VA"
+    },
+    {
+      "code": "VC"
+    },
+    {
+      "code": "VE",
+      "validateFormat": "0{0,2}(58)?(412|414|424|416|426)([0-9]{7})",
+      "defaultFormat": "58$2$3",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "timeZone": "America/Caracas"
+    },
+    {
+      "code": "VG"
+    },
+    {
+      "code": "VI"
+    },
+    {
+      "code": "VN"
+    },
+    {
+      "code": "VU"
+    },
+    {
+      "code": "WF"
+    },
+    {
+      "code": "WS"
+    },
+    {
+      "code": "XK"
+    },
+    {
+      "code": "YE"
+    },
+    {
+      "code": "YT"
+    },
+    {
+      "code": "YU"
+    },
+    {
+      "code": "ZA"
+    },
+    {
+      "code": "ZM"
+    },
+    {
+      "code": "ZW"
+    },
+    {
+      "code": "ZN",
+      "validateFormat": "$1"
+    },
+    {
+      "code": "Z1",
+      "validateFormat": "0{0,2}(1)([2-9][0-9]{2})([2-9][0-9]{2})([0-9]{4})",
+      "defaultFormat": "1$2$3$4",
+      "viewFormat": "+CCC (AC) N1-N2",
+      "cccPattern": "$1",
+      "areaCodePattern": "$2",
+      "numberPart1Pattern": "$3",
+      "numberPart2Pattern": "$4",
+      "timeZone": "US/Eastern"
+    }
+  ]
+}
