@@ -12,9 +12,10 @@ type Maps = HashMap<String, HashMap<String, String>>;
 
 fn main() {
     println!("Running ...");
-    let res = process_csv("2giga.csv", "BR", HashMap::new()).unwrap();
+    let _res = process_csv("1giga.csv", "BR", HashMap::new()).unwrap();
+    println!("Finished");
 
-    dbg!(res);
+    // dbg!(res);
 }
 
 // fn csv_reader(path: &str) -> Result<CsvData, String> {
