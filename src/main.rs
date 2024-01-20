@@ -1,65 +1,31 @@
-use calamine::{open_workbook, DataType, Reader, Xlsx};
 use std::collections::HashMap;
-use simple_error::SimpleError;
 
 mod countries;
 mod csv_core;
 mod functions;
 mod phone;
 
-use csv_core::CsvData;
-use csv_core::FileData;
-
+// use csv_core::CsvData;
 
 type Maps = HashMap<String, HashMap<String, String>>;
 
 
 fn main() {
-    println!("Hello, world!");
+    println!("Running ...");
+    let res = process_csv("2giga.csv", "BR", HashMap::new()).unwrap();
+
+    dbg!(res);
 }
 
-fn csv_reader(path: &str) -> Result<CsvData, String> {
-    let csv_data = csv_core::path_to_csv_data(path)?;
+// fn csv_reader(path: &str) -> Result<CsvData, String> {
+//     let csv_data = csv_core::path_to_csv_data(path)?;
 
-    Ok(csv_data)
-}
+//     Ok(csv_data)
+// }
 
-fn excel_reader(path: String) -> Result<String, io::Error> {
-    let mut excel: Xlsx<_> = open_workbook(path).map_err(|_| Err(SimpleError::new("file_not_found")))?;
-    let mut content = String::new();
-
-    match excel.worksheet_range_at(0) {
-        Some(Ok(sheet)) => {
-            for row in sheet.rows() {
-                for cell in row.iter() {
-                    match cell {
-                        DataType::String(string) => content.push_str(string),
-                        DataType::Float(float) => content.push_str(&float.to_string()),
-                        _ => content.push_str(""),
-                    }
-
-                    content.push(';');
-                }
-
-                content.pop();
-                content.push('\n')
-            }
-        }
-        _ => return Err(SimpleError::new("worksheet_not_found.")),
-    }
-
-    Ok(content)
-}
-
-fn csv_content_reader(content: &str) -> Result<FileData, String> {
-    let file_data = csv_core::verify_content(content)?;
-
-    Ok(file_data)
-}
-
-fn csv_to_text(data: Vec<Vec<String>>) -> Result<String, String> {
-    csv_core::to_text(data)
-}
+// fn csv_to_text(data: Vec<Vec<String>>) -> Result<String, String> {
+//     csv_core::to_text(data)
+// }
 
 fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String, String> {
     let csv_data = csv_core::path_to_csv_data(path)?;
@@ -107,4 +73,16 @@ fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String
     }
 
     Ok(csv_core::to_text(body)?)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::collections::HashMap;
+
+    #[test]
+    fn test_process_csv() {
+        let result = process_csv("1giga.csv", "BR", HashMap::new());
+        assert!(result.is_ok(), "process_csv should return Ok with valid input");
+    }
 }

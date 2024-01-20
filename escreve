@@ -1,0 +1,12 @@
+#! /usr/bin/env elixir
+
+IO.puts("Creating File ...")
+
+headers = "destination,name,org,correlation_id\n"
+data = String.duplicate("11977775555,Daniel,Sinch,HD124 | 6\n", 28_000_000)
+
+IO.puts("Writing File ...")
+File.write("1giga.csv", headers <> data)
+IO.puts("Done!")
+
+# chmod +x ./escreve && ./escreve
