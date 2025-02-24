@@ -7,7 +7,7 @@ fn apply_function(function: &str, value: String, target: Option<&String>) -> Str
     match function {
         "send_date" => Utc::now().format("%-d/%m/%Y").to_string(),
         "send_hour" => send_hour(target),
-        "random_num" => rand::thread_rng().gen_range(0..1000).to_string(),
+        "random_num" => rand::rng().random_range(0..1000).to_string(),
         "downcase" => value.to_lowercase(),
         "upcase" => value.to_uppercase(),
         "first_word" => value.split(' ').next().unwrap_or("").to_string(),
