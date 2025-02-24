@@ -12,26 +12,16 @@ type Maps = HashMap<String, HashMap<String, String>>;
 
 fn main() {
     println!("Running ...");
-    let _res = process_csv("1giga.csv", "BR", HashMap::new()).unwrap();
+    let _res = process_csv("10giga.csv", "BR", HashMap::new()).unwrap();
     println!("Finished");
 
     // dbg!(res);
 }
 
-// fn csv_reader(path: &str) -> Result<CsvData, String> {
-//     let csv_data = csv_core::path_to_csv_data(path)?;
-
-//     Ok(csv_data)
-// }
-
-// fn csv_to_text(data: Vec<Vec<String>>) -> Result<String, String> {
-//     csv_core::to_text(data)
-// }
-
 fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String, String> {
     let csv_data = csv_core::path_to_csv_data(path)?;
     let with_functions = functions != HashMap::new();
-    let old_headers = csv_data.placeholders.clone().split_off(1);
+    let old_headers = csv_data.placeholders.clone();
     let mut leftover_headers = vec![];
     let mut header = vec!["d3stinati0n".to_string()];
 
@@ -52,8 +42,8 @@ fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String
     let mut body: Vec<Vec<String>> = vec![];
     body.push(header);
 
-    for mut line in csv_data.data {
-        let phone_number = line.remove(0);
+    for line in csv_data.data {
+        let phone_number = line.clone().remove(0);
         let mut new_row = vec![];
 
         new_row.push(phone::format_destination(&phone_number, country_code));
@@ -83,7 +73,7 @@ mod tests {
 
     #[test]
     fn test_process_csv() {
-        let result = process_csv("1giga.csv", "BR", HashMap::new());
+        let result = process_csv("10giga.csv", "BR", HashMap::new());
         assert!(result.is_ok(), "process_csv should return Ok with valid input");
     }
 }
