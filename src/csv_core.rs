@@ -11,14 +11,6 @@ pub struct CsvData {
     pub data: Vec<Vec<String>>,
 }
 
-// pub struct FileData {
-//     valid: bool,
-//     destination_count: usize,
-//     placeholders: Vec<String>,
-//     example_data: HashMap<String, String>,
-//     errors: Vec<String>,
-// }
-
 pub fn to_text(data: Vec<Vec<String>>) -> Result<String, String> {
     let mut writer = WriterBuilder::new()
         .delimiter(b';')

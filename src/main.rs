@@ -12,8 +12,6 @@ fn main() {
     let res = process_csv("20mb.txt", "BR", HashMap::new()).unwrap();
     println!("Finished");
     println!("{}", res);
-
-    // dbg!(res);
 }
 
 fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String, String> {
