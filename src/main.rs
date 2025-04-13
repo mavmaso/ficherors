@@ -5,15 +5,13 @@ mod csv_core;
 mod functions;
 mod phone;
 
-// use csv_core::CsvData;
-
 type Maps = HashMap<String, HashMap<String, String>>;
-
 
 fn main() {
     println!("Running ...");
-    let _res = process_csv("10giga.csv", "BR", HashMap::new()).unwrap();
+    let res = process_csv("20mb.txt", "BR", HashMap::new()).unwrap();
     println!("Finished");
+    println!("{}", res);
 
     // dbg!(res);
 }
@@ -73,7 +71,7 @@ mod tests {
 
     #[test]
     fn test_process_csv() {
-        let result = process_csv("10giga.csv", "BR", HashMap::new());
+        let result = process_csv("0mb.txt", "BR", HashMap::new());
         assert!(result.is_ok(), "process_csv should return Ok with valid input");
     }
 }

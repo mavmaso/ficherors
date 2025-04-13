@@ -1,0 +1,6 @@
+destination,name,organization,nickname
+5516912345678,Test Contact 1,Empresa,Nickname 1
+5516912345679,Test Contact 2,Empresa,Nickname 2
+5516912345670,Test Contact 3,Empresa,Nickname 3
+5516912345671,Test Contact 4,Empresa,Nickname 4
+5516912345672,Test Contact 5,Empresa,Nickname 5
