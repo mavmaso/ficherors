@@ -1,4 +1,6 @@
 use std::collections::HashMap;
+use csv::{WriterBuilder};
+use anyhow::{Result, anyhow};
 
 mod countries;
 mod csv_core;
@@ -14,12 +16,13 @@ fn main() {
     println!("{}", res);
 }
 
-fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String, String> {
-    let csv_data = csv_core::path_to_csv_data(path)?;
+fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String> {
+    let csv_data = csv_core::path_to_csv_data(path).map_err(|e| anyhow!(e))?;
     let with_functions = functions != HashMap::new();
     let old_headers = csv_data.placeholders.clone();
     let mut leftover_headers = vec![];
     let mut header = vec!["d3stinati0n".to_string()];
+    let new_path = "destinations.csv".to_string();
 
     if with_functions {
         functions.keys().for_each(|k| header.push(k.to_string()));
@@ -35,8 +38,12 @@ fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String
         header.extend(old_headers.clone())
     }
 
-    let mut body: Vec<Vec<String>> = vec![];
-    body.push(header);
+    let mut writer = WriterBuilder::new()
+        .delimiter(b';')
+        .has_headers(true)
+    .from_path(&new_path).map_err(|e| anyhow!(e))?;
+
+    writer.write_record(header).map_err(|e| anyhow!(e))?;
 
     for line in csv_data.data {
         let phone_number = line.clone().remove(0);
@@ -56,11 +63,12 @@ fn process_csv(path: &str, country_code: &str, functions: Maps) -> Result<String
             line.into_iter().for_each(|l| new_row.push(l));
         }
 
-        body.push(new_row);
+        writer.write_record(new_row).map_err(|e| anyhow!(e))?;
     }
 
-    Ok(csv_core::to_text(body)?)
+    Ok(new_path)
 }
+
 
 #[cfg(test)]
 mod tests {
