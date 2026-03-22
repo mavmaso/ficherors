@@ -1,7 +1,6 @@
 use csv::{Reader, ReaderBuilder};
-// use regex::Regex;
-// use std::collections::HashMap;
-use std::io::Read;
+use regex::Regex;
+use std::io::{Cursor, Read};
 use std::fs::File;
 use std::io::{BufReader, BufRead};
 use anyhow::{Result, Context, anyhow};
@@ -12,48 +11,35 @@ pub struct CsvData {
     pub data: Vec<Vec<String>>,
 }
 
-// pub fn to_text(data: Vec<Vec<String>>) -> Result<String, String> {
-//     let mut writer = WriterBuilder::new()
-//         .delimiter(b';')
-//         .has_headers(true)
-//         .from_writer(vec![]);
+pub struct FileData {
+    pub valid: bool,
+    pub errors: Vec<String>,
+    pub error_type: String,
+    pub destination_count: usize,
+}
 
-//     for record in data {
-//         writer
-//             .write_record(record)
-//             .map_err(|_| format!("write_error"))?;
-//     }
-
-//     let _ = writer.flush().map_err(|_| return format!("flush_error"));
-
-//     let csv_bin = writer
-//         .into_inner()
-//         .map_err(|_| format!("inner_erorr"))?;
-        
-//     let csv_string = String::from_utf8(csv_bin).map_err(|_| format!("stringfy_error"))?;
-
-//     Ok(csv_string)
-// }
-
-pub fn path_to_csv_data(path: &str) -> Result<CsvData> {
+/// Opens a file and returns a CSV Reader with the detected delimiter.
+pub fn csv_reader(path: &str) -> Result<Reader<File>> {
     let f = File::open(path).with_context(|| format!("failed to open file `{}`", path))?;
+    let buf = BufReader::new(f);
 
-    let reader = BufReader::new(f);
-
-    let separator = match reader.lines().next() {
+    let separator = match buf.lines().next() {
         Some(Ok(first_line)) => get_separator(&first_line),
-        Some(Err(e)) => return Err(anyhow!(e)).context("failed to read first line")?,
+        Some(Err(e)) => return Err(anyhow!(e)).context("failed to read first line"),
         None => return Err(anyhow!("separator_error")),
     };
 
-    let csv_reader = ReaderBuilder::new()
+    let reader = ReaderBuilder::new()
         .delimiter(separator)
         .from_path(path)
         .with_context(|| format!("failed to open csv at `{}`", path))?;
 
-    let csv_data = create_csv_data(csv_reader)?;
+    Ok(reader)
+}
 
-    Ok(csv_data)
+pub fn path_to_csv_data(path: &str) -> Result<CsvData> {
+    let reader = csv_reader(path)?;
+    create_csv_data(reader)
 }
 
 pub fn create_csv_data<T: Read>(mut reader: Reader<T>) -> Result<CsvData> {
@@ -96,25 +82,7 @@ fn check_header(header: &Vec<String>) -> Result<()> {
     Ok(())
 }
 
-// fn verify_telefones(data: &[Vec<String>], errors: &mut Vec<String>, valid: &mut bool) {
-//     let regex = Regex::new(r"^\s*\d+\s*$").unwrap();
-
-//     let collumns: Vec<String> = data
-//         .iter()
-//         .map(|vec| vec.get(0).unwrap_or(&String::new()).to_string())
-//         .collect();
-
-//     for (index, content) in collumns.iter().enumerate() {
-//         if !regex.is_match(content) {
-//             *valid = false;
-//             errors.push(format!(
-//                 "Error on line {}: {} invalid telephone\n",
-//                 index + 2,
-//                 content
-//             ))
-//         }
-//     }
-// }
+// fn verify_telefones removed – logic moved into verify_content
 
 pub fn get_separator(line: &str) -> u8 {
     match true {
@@ -122,6 +90,160 @@ pub fn get_separator(line: &str) -> u8 {
         _ if line.contains('|') => b'|',
         _ if line.contains('\t') => b'\t',
         _ if line.contains(',') => b',',
+        _ if line.contains(' ') => b' ',
         _ => b',',
+    }
+}
+
+/// Wraps a text string into a CSV Reader using auto-detected delimiter.
+pub fn text_to_reader(text: &str) -> Result<Reader<Cursor<Vec<u8>>>> {
+    let first_line = text.lines().next().unwrap_or("");
+    let separator = get_separator(first_line);
+    let cursor = Cursor::new(text.as_bytes().to_vec());
+    let reader = ReaderBuilder::new()
+        .delimiter(separator)
+        .from_reader(cursor);
+    Ok(reader)
+}
+
+/// Validates CSV content and returns a FileData summary.
+pub fn verify_content<T: Read>(mut reader: Reader<T>) -> Result<FileData> {
+    let headers: Vec<String> = reader
+        .headers()
+        .context("failed to read CSV headers")?
+        .iter()
+        .map(|s| s.to_string())
+        .collect();
+
+    if headers.contains(&String::from("")) {
+        return Ok(FileData {
+            valid: false,
+            errors: vec!["Invalid header\n".to_string()],
+            error_type: "critical error".to_string(),
+            destination_count: 0,
+        });
+    }
+
+    let mut rows: Vec<Vec<String>> = vec![];
+    for row in reader.records() {
+        let r = row.context("row_format")?;
+        rows.push(r.iter().map(|f| f.to_string()).collect());
+    }
+
+    if rows.is_empty() {
+        return Ok(FileData {
+            valid: false,
+            errors: vec!["No rows found\n".to_string()],
+            error_type: String::new(),
+            destination_count: 0,
+        });
+    }
+
+    let phone_regex = Regex::new(r"^\s*\d+\s*$").expect("static regex is valid");
+    let mut errors: Vec<String> = vec![];
+    let mut destination_count = 0usize;
+
+    for (index, row) in rows.iter().enumerate() {
+        let phone = row.first().map(|s| s.as_str()).unwrap_or("");
+        if phone_regex.is_match(phone) {
+            destination_count += 1;
+        } else {
+            errors.push(format!(
+                "Error on line {}: {} invalid telephone\n",
+                index + 2,
+                phone
+            ));
+        }
+    }
+
+    Ok(FileData {
+        valid: errors.is_empty(),
+        errors,
+        error_type: String::new(),
+        destination_count,
+    })
+}
+
+/// Detects whether a file uses CR (Windows \r\n) or LF (Unix \n) line endings.
+pub fn detect_line_terminator(path: &str) -> Result<String> {
+    let content = std::fs::read(path)
+        .with_context(|| format!("failed to open file `{}`", path))?;
+
+    if content.contains(&b'\r') {
+        Ok("CR".to_string())
+    } else {
+        Ok("LF".to_string())
+    }
+}
+
+/// Strips carriage-return characters from CSV headers (handles CR/CRLF files).
+pub fn clean_headers(headers: Vec<String>) -> Vec<String> {
+    headers.into_iter().map(|h| h.replace('\r', "")).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_separator() {
+        assert_eq!(get_separator("a;b;c"), b';');
+        assert_eq!(get_separator("a|b|c"), b'|');
+        assert_eq!(get_separator("a\tb\tc"), b'\t');
+        assert_eq!(get_separator("a,b,c"), b',');
+        assert_eq!(get_separator("a b c"), b' ');
+        assert_eq!(get_separator("abc"), b',');
+    }
+
+    #[test]
+    fn test_clean_headers() {
+        let headers = vec!["name\r".to_string(), "phone".to_string()];
+        assert_eq!(clean_headers(headers), vec!["name", "phone"]);
+    }
+
+    #[test]
+    fn test_verify_content_valid() {
+        let csv = "destination,organization\n5511933336666,Movile\n";
+        let reader = text_to_reader(csv).unwrap();
+        let result = verify_content(reader).unwrap();
+        assert!(result.valid);
+        assert_eq!(result.destination_count, 1);
+    }
+
+    #[test]
+    fn test_verify_content_empty_header() {
+        let csv = "destination,,organization\n5511933336666,x,y\n";
+        let reader = text_to_reader(csv).unwrap();
+        let result = verify_content(reader).unwrap();
+        assert!(!result.valid);
+        assert_eq!(result.error_type, "critical error");
+        assert_eq!(result.errors, vec!["Invalid header\n"]);
+    }
+
+    #[test]
+    fn test_verify_content_no_rows() {
+        let csv = "destination,organization\n";
+        let reader = text_to_reader(csv).unwrap();
+        let result = verify_content(reader).unwrap();
+        assert!(!result.valid);
+        assert_eq!(result.errors, vec!["No rows found\n"]);
+    }
+
+    #[test]
+    fn test_detect_line_terminator_lf() {
+        let result = detect_line_terminator("tests/test_files/valid_1.csv").unwrap();
+        assert_eq!(result, "LF");
+    }
+
+    #[test]
+    fn test_detect_line_terminator_cr() {
+        let result = detect_line_terminator("tests/test_files/comma_cr.csv").unwrap();
+        assert_eq!(result, "CR");
+    }
+
+    #[test]
+    fn test_detect_line_terminator_not_found() {
+        let result = detect_line_terminator("tests/test_files/nonexistent.csv");
+        assert!(result.is_err());
     }
 }

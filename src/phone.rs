@@ -15,7 +15,7 @@ pub fn format_destination(phone_number: &str, country_code: &str) -> String {
 }
 
 fn clean_phone_number(phone: &str) -> String {
-    let re = Regex::new(r#"[^0-9]"#).unwrap();
+    let re = Regex::new(r#"[^0-9]"#).expect("static regex is valid");
 
     re.replace_all(phone, "").to_string()
 }
@@ -23,7 +23,7 @@ fn clean_phone_number(phone: &str) -> String {
 fn format_as_default(phone: &str, country_code: &str) -> String {
     let clean_phone = clean_phone_number(phone);
     let country_info = get_country_info(country_code);
-    let re = Regex::new(&format!("^{}$", country_info.validate_format)).unwrap();
+    let re = Regex::new(&format!("^{}$", country_info.validate_format)).expect("country validate_format");
 
     re.replace(&clean_phone, &country_info.default_format.to_string())
         .to_string()
@@ -34,7 +34,7 @@ fn get_country_info<'a>(code: &str) -> countries::CountryInfo<'a> {
     countries::COUNTRIES
         .into_iter()
         .find(|country| country.code == code)
-        .unwrap()
+        .expect("country code must exist in COUNTRIES")
 }
 
 #[cfg(test)]

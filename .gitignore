@@ -1,6 +1,5 @@
 /target
 
-*.csv
-
 20mb.txt
 100mb.txt
+destinations.csv

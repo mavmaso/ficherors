@@ -1,0 +1,3 @@
+destination,namé,organizationcom
+5516912345672,Você,Sinch
+5511999999991,Ele,Wavy

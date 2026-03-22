@@ -1,6 +1,6 @@
 use crate::Maps;
 use chrono::{FixedOffset, Utc};
-use rand::Rng;
+use rand::RngExt;
 use std::collections::HashMap;
 
 fn apply_function(function: &str, value: String, target: Option<&String>) -> String {
@@ -33,9 +33,9 @@ fn parse_timezone(timezone: &str) -> FixedOffset {
     let seconds = hours * 3600 + minutes * 60;
 
     if timezone.contains('-') {
-        FixedOffset::west_opt(seconds).unwrap()
+        FixedOffset::west_opt(seconds).expect("timezone offset out of range")
     } else {
-        FixedOffset::east_opt(seconds).unwrap()
+        FixedOffset::east_opt(seconds).expect("timezone offset out of range")
     }
 }
 
@@ -49,8 +49,8 @@ fn get_function_index(map: &HashMap<String, String>, headers: &[String]) -> Opti
 
 pub fn fill_row(new_row: &mut Vec<String>, functions: &Maps, row: &[String], headers: &[String]) {
     functions.keys().for_each(|key| {
-        let map = functions.get(key).unwrap();
-        let fun = map.get("fn").unwrap();
+        let map = functions.get(key).expect("key must exist in functions map");
+        let fun = map.get("fn").expect("function map must contain 'fn' key");
         let target = map.get("target");
 
         let value = get_function_index(map, headers).
