@@ -1,5 +1,22 @@
+use std::collections::HashMap;
+use std::sync::OnceLock;
 use super::countries;
 use regex::Regex;
+
+static COUNTRY_REGEXES: OnceLock<HashMap<&'static str, Regex>> = OnceLock::new();
+
+fn country_regexes() -> &'static HashMap<&'static str, Regex> {
+    COUNTRY_REGEXES.get_or_init(|| {
+        countries::COUNTRIES
+            .iter()
+            .map(|c| {
+                let re = Regex::new(&format!("^{}$", c.validate_format))
+                    .expect("static country regex is valid");
+                (c.code, re)
+            })
+            .collect()
+    })
+}
 
 pub fn format_destination(phone_number: &str, country_code: &str) -> String {
     let country_code = country_code.to_uppercase();
@@ -15,17 +32,17 @@ pub fn format_destination(phone_number: &str, country_code: &str) -> String {
 }
 
 fn clean_phone_number(phone: &str) -> String {
-    let re = Regex::new(r#"[^0-9]"#).expect("static regex is valid");
-
-    re.replace_all(phone, "").to_string()
+    phone.chars().filter(|c| c.is_ascii_digit()).collect()
 }
 
 fn format_as_default(phone: &str, country_code: &str) -> String {
     let clean_phone = clean_phone_number(phone);
     let country_info = get_country_info(country_code);
-    let re = Regex::new(&format!("^{}$", country_info.validate_format)).expect("country validate_format");
+    let re = country_regexes()
+        .get(country_code)
+        .expect("country code must have a compiled regex");
 
-    re.replace(&clean_phone, &country_info.default_format.to_string())
+    re.replace(&clean_phone, country_info.default_format)
         .to_string()
 }
 

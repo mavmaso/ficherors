@@ -21,8 +21,8 @@ fn main() {
     println!("Running ...");
 
     let metadata = Metadata {
-        country_code: "BR".to_string(),
-        has_accent: false,
+        country_code: String::new(),
+        has_accent: true,
         new_path: "destinations.csv".to_string(),
     };
 
@@ -239,7 +239,9 @@ mod tests {
             has_accent: true,
             new_path: "/tmp/test_process_br.csv".to_string(),
         };
+
         let result = process_csv("tests/test_files/valid_br_phones.csv", HashMap::new(), metadata);
+
         assert!(result.is_ok());
         let out = std::fs::read_to_string("/tmp/test_process_br.csv").unwrap();
         let rows: Vec<&str> = out.split('\n').collect();
@@ -256,7 +258,9 @@ mod tests {
             has_accent: false,
             new_path: "/tmp/test_process_accent.csv".to_string(),
         };
+
         let result = process_csv("tests/test_files/valid_w_accent.txt", HashMap::new(), metadata);
+
         assert!(result.is_ok());
         let out = std::fs::read_to_string("/tmp/test_process_accent.csv").unwrap();
         assert!(out.contains("Voce"));
@@ -270,7 +274,9 @@ mod tests {
             has_accent: false,
             new_path: "/tmp/test_comma_cr.csv".to_string(),
         };
+
         let result = process_csv("tests/test_files/comma_cr.csv", HashMap::new(), metadata);
+
         assert!(result.is_ok());
         let out = std::fs::read_to_string("/tmp/test_comma_cr.csv").unwrap();
         assert!(out.contains("d3stinati0n;destination;name;organization;nickname"));
@@ -280,7 +286,9 @@ mod tests {
     #[test]
     fn test_process_csv_spaces_file() {
         let metadata = make_metadata("/tmp/test_spaces.csv");
+
         let result = process_csv("tests/test_files/valid_w_spaces.txt", HashMap::new(), metadata);
+
         assert!(result.is_ok());
         let out = std::fs::read_to_string("/tmp/test_spaces.csv").unwrap();
         assert!(out.contains("5516912345672"));

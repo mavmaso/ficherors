@@ -51,6 +51,29 @@ cargo build --release
 > `codegen-units = 1` forces a single compilation unit, giving the compiler maximum visibility for inlining and dead-code elimination.  
 > Build time will be slower, but the binary will be as fast as possible.
 
+## Benchmark
+
+Build with `--release` and measure execution time with `time`:
+
+```sh
+cargo build --release
+time ./target/release/ficherors
+```
+
+Example output (20 MB file on Apple Silicon, no country code, `has_accent: true`):
+
+```
+________________________________________________________
+Executed in    1.06 secs      fish           external
+   usr time  432.54 millis  154.00 micros  432.39 millis
+   sys time   42.28 millis  575.00 micros   41.70 millis
+```
+
+> The bottleneck is CPU (usr time), not I/O (sys time).  
+> Equivalent configuration to the Elixir and Zig benchmarks: empty `country_code`, `has_accent: true` (accent removal disabled).
+
+With `country_code: "BR"` and accent removal enabled the same file takes ~1.57s.
+
 ## Test
 
 ```sh
